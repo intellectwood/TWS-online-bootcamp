@@ -1,11 +1,14 @@
-const main = require('../main/main');
+const printInventory = require('../main/main.js');
+//const datbase= require('../main/datbase.js');
+//var loadAllItems=datbase.loadAllItems();
+//var loadPromotions=datbase.loadPromotions();
 
 describe('pos', function () {
-    var allItems;
+  //  var allItems;
     var inputs;
 
     beforeEach(function () {
-        allItems = loadAllItems();
+    //    allItems = loadAllItems();
         inputs = [
             'ITEM000001',
             'ITEM000001',
@@ -22,9 +25,7 @@ describe('pos', function () {
     it('should print correct text', function () {
 
         spyOn(console, 'log');
-
-        printInventory(inputs);
-
+       printInventory(inputs);//输出到console上面了
         var expectText =
             '***<没钱赚商店>购物清单***\n' +
             '名称：雪碧，数量：5瓶，单价：3.00(元)，小计：12.00(元)\n' +
@@ -40,5 +41,6 @@ describe('pos', function () {
             '**********************';
 
         expect(console.log).toHaveBeenCalledWith(expectText);
+       //    expect( printInventory(inputs)).toEqual( 12);
     });
 });
