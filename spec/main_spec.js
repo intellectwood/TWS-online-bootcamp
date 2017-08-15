@@ -1,3 +1,5 @@
+
+
 "use strict";
 
 var main = require("../lib/main.js");
@@ -7,10 +9,10 @@ describe("With given ZIP code,outputing bar code.", function(){
 
 
     it("输入中国邮编 021000（内蒙古 > 海拉尔区 > 爱民路等）：", function(){
-        console.log('输入中国邮编 021000（内蒙古 > 海拉尔区 > 爱民路等）\n输出：');
+        console.log('输入中国邮编 021000（内蒙古 > 海拉尔区 > 爱民路等）\n输出(最后一位是校验码)：');
         var input='021000';
         var result = main(input);
-        var expect_string ='| ||::: ::|:| :::|| ||::: ||::: ||::: |';
+        var expect_string ='| ||::: ::|:| :::|| ||::: ||::: ||::: |:::| |';
         
 
         expect(expect_string).toEqual(result);
@@ -18,10 +20,10 @@ describe("With given ZIP code,outputing bar code.", function(){
 
       
     it("输入美国邮编 88595-0001(O BOX,EL PASO,El Paso,Texas)：", function(){
-        console.log('输入美国邮编 88595-0001(O BOX,EL PASO,El Paso,Texas)\n输出：');
+        console.log('输入美国邮编 88595-0001(O BOX,EL PASO,El Paso,Texas)\n输出(最后一位是校验码)：');
         var input='88595-0001';
         var result = main(input);
-        var expect_string ="| |::|: |::|: :|:|: |:|:: :|:|: ||::: ||::: ||::: :::|| |";
+        var expect_string ="| |::|: |::|: :|:|: |:|:: :|:|: ||::: ||::: ||::: :::|| :|::| |";
         
         expect(expect_string).toEqual(result);
     });
