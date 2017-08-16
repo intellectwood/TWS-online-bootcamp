@@ -5,6 +5,7 @@ const Worker = require('../../main/practice-1/worker');
 describe("Person", () => {
   it("should have field name and age", () => {
     let person = new Person("Tom", 21);
+
     expect(person.name).toBe("Tom");
     expect(person.age).toBe(21);
   });
@@ -17,13 +18,13 @@ describe("Person", () => {
     expect(introduce).toBe("My name is Tom. I am 21 years old.");
 
   });
-
+});
   describe("Student", () => {
     it("should have field name, age and class number", () => {
       let student = new Student("Tom", 21, 2);
       expect(student.name).toBe("Tom");
       expect(student.age).toBe(21);
-      expect(student.klass).toBe(2);
+      expect(student.clazz).toBe(2);
 
     });
 
@@ -37,6 +38,8 @@ describe("Person", () => {
 
   });
 
+  
+/*
   describe("Worker", () => {
 
     it("should have field name, age and klass", () => {
@@ -54,5 +57,4 @@ describe("Person", () => {
 
     });
 
-  });
-});
+  });*/

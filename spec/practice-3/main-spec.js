@@ -75,7 +75,7 @@ describe("Teacher", () => {
     let teacher = new Teacher("Joun", 21, [clazz1, clazz2]);
     expect(teacher.name).toBe("Joun");
     expect(teacher.age).toBe(21);
-    expect(teacher.clazzes).toEqual([clazz1, clazz2]);
+    expect(teacher.classes).toEqual([clazz1, clazz2]);
   });
 
   it("should overwrite Person introduce and show all classes this teacher teaches, whe" +
@@ -156,9 +156,11 @@ describe("Class", () => {
     let clazz = new Class(2);
     let student = new Student("Jerry", 21, clazz);
     let teacher = new Teacher("Tom", 21, [clazz]);
-    spyOn(teacher, 'notifyStudentAppended');
+    	let notice;
+  //  spyOn(teacher, 'notifyStudentAppended');
     clazz.appendMember(student);
-    expect(teacher.notifyStudentAppended).toHaveBeenCalledWith("Jerry has joined Class 2");
+    notice=teacher.notifyStudentAppended();
+    expect(notice).toBe("I am Tom. I know Jerry has joined Class 2.");
   });
 
   it("should call teacher's assign class leader event, when a student is assigned to b" +
@@ -167,11 +169,14 @@ describe("Class", () => {
     let clazz = new Class(2);
     let student = new Student("Jerry", 21, clazz);
     let teacher = new Teacher("Tom", 21, [clazz]);
-    spyOn(teacher, 'notifyLeaderAssigned');
-    spyOn(teacher, 'notifyStudentAppended');
+	let notice;
+ //   spyOn(teacher, 'notifyLeaderAssigned');
+ //   spyOn(teacher, 'notifyStudentAppended');
     clazz.appendMember(student);
     clazz.assignLeader(student);
-    expect(teacher.notifyLeaderAssigned).toHaveBeenCalledWith("Jerry become Leader of Class 2")
+
+    notice=teacher.notifyLeaderAssigned();
+    expect(notice).toBe("I am Tom. I know Jerry become Leader of Class 2.")
   });
 
 });

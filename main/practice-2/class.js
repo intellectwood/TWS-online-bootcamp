@@ -1,2 +1,13 @@
-// Write your code here
-module.exports = class Class {}
+class Class{
+
+   constructor(number) {
+     this.number=number;      
+     this.leader;
+    }
+    assignLeader(student){
+        this.leader=student.name;
+    }
+
+}
+
+module.exports =Class;
