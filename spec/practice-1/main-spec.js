@@ -39,7 +39,7 @@ describe("Person", () => {
   });
 
   
-/*
+
   describe("Worker", () => {
 
     it("should have field name, age and klass", () => {
@@ -57,4 +57,4 @@ describe("Person", () => {
 
     });
 
-  });*/
+  });
