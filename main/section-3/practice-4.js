@@ -1,77 +1,85 @@
 'use strict';
 
-function find(collection, ch) {
-    for (let item of collection) {
-        if (item.key === ch) {
-            return item;
-        }
-    }
+const LongLength=1; //设定length超过多少算一个长的str
 
-    return null;
+function judgeLongItem(str){
+    if(str.length>LongLength) return true;
+    else return false;
 }
 
-function summarize(collection) {
-    let result = [];
-    for (let item of collection) {
-        let obj = find(result, item)
-        if (obj) {
-            obj.count++;
-        } else {
-            result.push({key: item, count: 1});
-        }
+function getItemTimes(str){
+    
+    let result;
+    if(judgeLongItem(str)){
+      result= parseInt(str.replace(/[^0-9]/ig,""));
     }
+    else result=1;
+    
     return result;
-}
-
-function split(item) {
-    let array = item.split("-");
-    return {key: array[0], count: parseInt(array[1], 10)};
-}
-
-function push(result, key, count) {
-    for (var i = 0; i < count; i++) {
-        result.push(key);
-    }
 }
 
 function expand(collection) {
     let result = [];
-    for (let item of collection) {
-        if (item.length === 1) {
-            result.push(item);
-        } else {
-            let {key, count} = split(item);
-            push(result, key, count);
-        }
-    }
+    
+    collection.forEach(item=>{
+       let times = getItemTimes(item);
+   
+       
+       while(times>0){      
+        result.push(item[0]);
+        times--;
+       }
+
+    });
+
     return result;
 }
 
-function includes(collection, ch) {
-    for (let item of collection) {
-        if (item === ch) {
-            return true;
-        }
-    }
+function getObjectSummary(collectionExpended){
+    let result=[];
+    
+     result.push({key:collectionExpended[0], count:0});
+   
+    collectionExpended.forEach(itemStr=>{
+          let flg=0;
+          let count=0;
+        result.forEach( itemObj=>{
 
-    return false;
-}
+           count++;
+           
+          if(itemObj.key==itemStr) {itemObj.count++;      flg=1;     }
+          if( flg==0  && count== result.length && itemObj.key!=itemStr)  result.push({key:itemStr, count:1} );
+            
+         });
 
-function discount(collection, promotionItems) {
-    let result = [];
-    for (let item of collection) {
-        let key = item.key;
-        let count = item.count;
-        if (includes(promotionItems, key)) {
-            count = count - Math.floor(count / 3);
-        }
-        result.push({key, count});
-    }
+
+         
+    });
+    
     return result;
 }
+
 
 module.exports = function createUpdatedCollection(collectionA, objectB) {
-    let expandedArray = expand(collectionA);
-    let summarizedArray = summarize(expandedArray);
-    return discount(summarizedArray, objectB.value);
+  let collectionExpended= expand(collectionA);
+   let arrC= getObjectSummary(collectionExpended); 
+   let result=[];
+ 
+                   
+   result=arrC.map(itemObj=>{
+        objectB.value.forEach(item=>{
+            if(item==itemObj.key) {
+                 itemObj.count =  itemObj.count  - Math.floor( itemObj.count  / 3);
+
+            }
+        });
+  
+        return itemObj;
+    });  
+    
+
+         console.log(result);        
+
+ 
+    return result;
 }
